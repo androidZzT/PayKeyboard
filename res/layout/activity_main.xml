@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mykeyboarddemo.MainActivity" >
+    
+    <Button 
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pop"
+        />
+
+    <com.zzt.paykeyboard.widget.PasswordView
+        android:id="@+id/passwordView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn" >
+    </com.zzt.paykeyboard.widget.PasswordView>
+
+    <com.zzt.paykeyboard.widget.KeyboardView
+        android:id="@+id/transactionKeyboard1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/passwordView1" >
+
+    </com.zzt.paykeyboard.widget.KeyboardView>
+
+</RelativeLayout>
