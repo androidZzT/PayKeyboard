@@ -23,13 +23,17 @@ public class KeyboardWindow extends PopupWindow implements InputFinishListener{
 	private Context ctx;
 	/** popWindow  **/
 	private RelativeLayout content_layout;
-	/** ½»Ò×ĞÅÏ¢À¸ **/
+	/** äº¤æ˜“ä¿¡æ¯æ  **/
 	private RelativeLayout transactionInfo_layout;
-	/** ÃÜÂë¿ò **/
+	/** å¯†ç æ¡† **/
 	private PasswordView pwdView;
-	/** ¼üÅÌ **/
+	/** é”®ç›˜ **/
 	private KeyboardView keyboard;
-	/** Text ¼üÖµ¶Ô ¸ù¾İĞèÇóÉèÖÃ**/
+	/** æ˜¯å¦ä¹±åº **/
+	private boolean isDerangement = false;
+	/** æ˜¯å¦èƒ½è¾“å…¥å°æ•°ç‚¹ **/
+	private boolean canInputPoint = true;
+	/** Text é”®å€¼å¯¹ æ ¹æ®éœ€æ±‚è®¾ç½®**/
 	private TextView key1;
 	private TextView key2;
 	private TextView key3;
@@ -40,7 +44,18 @@ public class KeyboardWindow extends PopupWindow implements InputFinishListener{
 	private TextView[] values;
 	
 	public KeyboardWindow(Context context) {
+		this(context,false,true);
+	}
+	/**
+	 * 
+	 * @param context
+	 * @param isDerangement é”®ç›˜æ˜¯å¦ä¹±åº
+	 * @param canInputPoint é”®ç›˜æ˜¯å¦å¯è¾“å…¥å°æ•°ç‚¹
+	 */
+	public KeyboardWindow(Context context, boolean isDerangement, boolean canInputPoint) {
 		this.ctx = context;
+		this.isDerangement = isDerangement;
+		this.canInputPoint = canInputPoint;
 		initView(context);
 	}
 
@@ -48,27 +63,27 @@ public class KeyboardWindow extends PopupWindow implements InputFinishListener{
 		initTransactionInfo();
 		initKeyboard();
 		initContent();
-		// ÉèÖÃSelectPicPopupWindowµÄView
+		// è®¾ç½®SelectPicPopupWindowçš„View
         this.setContentView(content_layout);
-        // ÉèÖÃSelectPicPopupWindowµ¯³ö´°ÌåµÄ¿í
+        // è®¾ç½®SelectPicPopupWindowå¼¹å‡ºçª—ä½“çš„å®½
         this.setWidth(LayoutParams.MATCH_PARENT);
-        // ÉèÖÃSelectPicPopupWindowµ¯³ö´°ÌåµÄ¸ß
+        // è®¾ç½®SelectPicPopupWindowå¼¹å‡ºçª—ä½“çš„é«˜
         this.setHeight(LayoutParams.WRAP_CONTENT);
-        // ÉèÖÃSelectPicPopupWindowµ¯³ö´°Ìå¿Éµã»÷
+        // è®¾ç½®SelectPicPopupWindowå¼¹å‡ºçª—ä½“å¯ç‚¹å‡»
         this.setFocusable(true);
-        // ÉèÖÃSelectPicPopupWindowµ¯³ö´°Ìå¶¯»­Ğ§¹û
+        // è®¾ç½®SelectPicPopupWindowå¼¹å‡ºçª—ä½“åŠ¨ç”»æ•ˆæœ
         this.setAnimationStyle(R.style.AnimBottom);
-        // ÊµÀı»¯Ò»¸öColorDrawableÑÕÉ«Îª°ëÍ¸Ã÷
+        // å®ä¾‹åŒ–ä¸€ä¸ªColorDrawableé¢œè‰²ä¸ºåŠé€æ˜
         ColorDrawable dw = new ColorDrawable(0x66000000);
-        // ÉèÖÃSelectPicPopupWindowµ¯³ö´°ÌåµÄ±³¾°
+        // è®¾ç½®SelectPicPopupWindowå¼¹å‡ºçª—ä½“çš„èƒŒæ™¯
         this.setBackgroundDrawable(dw);
 	}
 	
 	private void initKeyboard() {
 		keyboard = new KeyboardView(ctx);
-		keyboard.setDerangement(true);
-		keyboard.setCanInputPoint(false);
-		keyboard.bindKBoardWithPwdView(pwdView); //°ó¶¨ ±ØĞëĞ´ ·ñÔò¼üÅÌÎŞ·¨³õÊ¼»¯
+		keyboard.setDerangement(isDerangement);
+		keyboard.setCanInputPoint(canInputPoint);
+		keyboard.bindKBoardWithPwdView(pwdView); //ç»‘å®š å¿…é¡»å†™ å¦åˆ™é”®ç›˜æ— æ³•åˆå§‹åŒ–
 	}
 	
 	private void initTransactionInfo() {
@@ -104,7 +119,7 @@ public class KeyboardWindow extends PopupWindow implements InputFinishListener{
 	}
 	
 	/**
-	 * ÆÁÄ»¿í¶È
+	 * å±å¹•å®½åº¦
 	 * @return
 	 */
 	private int getScreenWidth() {
@@ -113,7 +128,7 @@ public class KeyboardWindow extends PopupWindow implements InputFinishListener{
 	}
 	
 	/**
-	 *  ÉèÖÃÄÚÈİĞÅÏ¢
+	 *  è®¾ç½®å†…å®¹ä¿¡æ¯
 	 * @param data Map
 	 */
 	public void setInfo(Map<String, String> data) {
