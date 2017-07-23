@@ -6,7 +6,7 @@
 
 用法
 ---
-######初始化
+#### 初始化
 ```java
 	public KeyboardWindow(Context context) {
 		this(context,false,true);
@@ -26,13 +26,13 @@
 		initView(context);
 	}
 ```
-######弹出键盘
+#### 弹出键盘
 ```java
 	public void showWindow() {
 		showAtLocation(((Activity) ctx).findViewById(android.R.id.content).getRootView(), Gravity.BOTTOM, 0, 0);
 	}
 ```
-######设置文字提示
+#### 设置文字提示
 ```java
 /**
 	 *  设置内容信息
@@ -48,7 +48,7 @@
 		}
 	}
 ```
-######获取密码
+#### 获取密码
 ```java
 	public String getPassword() {
 		return pwdView.getCryptPwd();
